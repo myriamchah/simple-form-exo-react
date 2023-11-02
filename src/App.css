@@ -1,0 +1,73 @@
+body {
+  font-family: Montserrat, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 80px;
+}
+
+form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  justify-self: center;
+}
+
+form label {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  color: purple;
+}
+
+form input {
+  margin-bottom: 16px;
+  border: 1px solid plum;
+  border-radius: 5px;
+  padding: 8px 16px;
+}
+
+form button {
+  background-color: purple;
+  border: 1px solid purple;
+  color: plum;
+  font-weight: 600;
+  padding: 16px;
+  border-radius: 5px;
+}
+
+.pwd-container {
+  position: relative;
+}
+
+.pwd-container input {
+  width: 100%;
+}
+
+.pwd-container span {
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  color: plum;
+}
+
+button {
+  cursor: pointer;
+}
+
+footer {
+  padding: 32px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  margin: 0 3px;
+}
