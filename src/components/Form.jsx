@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Form = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+const Form = ({ account, setAccount, setStep }) => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState("eye");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const toggleEyeIcon = () => {
     if (type === "password") {
@@ -20,10 +16,18 @@ const Form = () => {
     }
   };
 
+  const onChange = (e) => {
+    setAccount((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (password1 === password2) {
+    if (account.password1 === account.password2) {
       alert("Account created, congrats!");
+      setStep(2);
     } else {
       setErrorMessage("Both passwords should be the same.");
     }
@@ -33,33 +37,28 @@ const Form = () => {
     <>
       <h1>Create an account</h1>
       <form onSubmit={onSubmit}>
-        <label htmlFor="userName">Name</label>
+        <label htmlFor="username">Name</label>
         <input
           type="text"
-          name="userName"
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-          value={username}
+          name="username"
+          onChange={onChange}
+          value={account.username}
         />
         <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          value={email}
+          onChange={onChange}
+          value={account.email}
         />
+
         <label htmlFor="password1">Password</label>
         <div className="pwd-container">
           <input
             type={type}
             name="password1"
-            onChange={(e) => {
-              setPassword1(e.target.value);
-            }}
-            value={password1}
+            onChange={onChange}
+            value={account.password1}
             style={{ borderColor: errorMessage && "red" }}
           />
           <span onClick={toggleEyeIcon}>
@@ -72,10 +71,8 @@ const Form = () => {
           <input
             type={type}
             name="password2"
-            onChange={(e) => {
-              setPassword2(e.target.value);
-            }}
-            value={password2}
+            onChange={onChange}
+            value={account.password2}
             style={{ borderColor: errorMessage && "red" }}
           />
           <span onClick={toggleEyeIcon}>
@@ -84,7 +81,9 @@ const Form = () => {
         </div>
 
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        <button type="submit">REGISTER</button>
+        <button className="btn-submit" type="submit">
+          REGISTER
+        </button>
       </form>
     </>
   );
